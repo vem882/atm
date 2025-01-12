@@ -10,12 +10,15 @@ jobs:
     name: Build
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@master
-      - name: send custom message with args
-        uses: appleboy/discord-action@master
-        with:
+    - uses: actions/checkout@master
+    - name: Get short SHA
+      id: sha
+      run: echo "short_sha=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+    - name: Send Discord notification
+      uses: appleboy/discord-action@master
+      with:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "#48f442"
           username: "GitBrother"
-          message: "**[ATM:Backend] 1 new commit** <- [View Commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})  [`${{ github.sha | substring(0, 7) }}`](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) ${{ github.event.head_commit.message }}"
+          message: "[ATM:Backend] 1 new commit <- [View Commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})\n[`${{ steps.sha.outputs.short_sha }}`](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) ${{ github.event.head_commit.message }}"
