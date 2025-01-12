@@ -1,0 +1,1 @@
+// ATM authentikaatio moduuli, jossa määritetään miten ATM:llä kirjaudutaan sisään ja ulos

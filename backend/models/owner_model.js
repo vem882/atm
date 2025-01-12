@@ -1,0 +1,1 @@
+//owner tietokantaan liittyvät kutsut

@@ -1,0 +1,1 @@
+//card tietokantaan liittyvät kutsut

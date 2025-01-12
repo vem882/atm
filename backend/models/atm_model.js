@@ -1,0 +1,1 @@
+//atm tietokantaan liittyvät kutsut

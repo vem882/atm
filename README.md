@@ -1,2 +1,5 @@
-# ATM
-OAMK: Ryhmä 3 Ohjelmistokehityksen sovellusprojekti tammikuu 2025
+# TVT24KMO Ryhmä 3 ATM 
+
+## ER-kaavion ensimmäinen versio valmis.
+<img src="Er_kaavioV1.png">
+

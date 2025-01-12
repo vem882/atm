@@ -1,0 +1,1 @@
+//Accountin transactions moduli, jossa määritetään miten tilitapahtumat hoidetaan.

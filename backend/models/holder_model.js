@@ -1,0 +1,1 @@
+//holder tietokantaan liittyvät kutsut
