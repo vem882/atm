@@ -21,4 +21,4 @@ jobs:
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "#48f442"
           username: "GitBrother"
-          message: "[ATM:Backend] 1 new commit <- [View Commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})\n[`${{ steps.sha.outputs.short_sha }}`](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) ${{ github.event.head_commit.message }}"
+          message: "[ATM:Backend] 1 new commit <- [View Commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})\n\n**[`${{ steps.sha.outputs.short_sha }}`](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) ${{ github.event.head_commit.message }}."
