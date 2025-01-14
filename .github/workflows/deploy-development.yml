@@ -24,10 +24,11 @@ jobs:
       - name: Deploy to Development
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.DEV_SERVER_USER }}@${{ secrets.DEV_SERVER_IP }} << 'EOF'
-            cd /var/www/development || exit
+            cd /home/x1dev || exit
             git init
             git remote add origin git@github.com:vem882/atm.git || true
             git fetch origin backend
             git reset --hard origin/backend
-            pm2 restart backend
+            cd /home/x1dev/atm/backend || exit
+            pm2 restart app
           EOF
