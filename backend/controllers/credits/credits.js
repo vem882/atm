@@ -1,1 +1,0 @@
-// Credit toimintoon liittyvät toiminnallisuudet
