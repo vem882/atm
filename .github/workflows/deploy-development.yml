@@ -13,25 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.DEV_SERVER_SSH_KEY }}
-
       # 3. Lähetetään uudet tiedostot palvelimelle ja kasataan dev-ympäristössä. 
       # siirytään kansioon /var/www/development, johon haetaan repositorysta uusin backend-haara.
       # käynistetään pm2-palvelin uudelleen.
       - name: Deploy to Development
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.DEV_SERVER_USER }}@${{ secrets.DEV_SERVER_IP }} << 'EOF'
-            cd /home/x1dev/dev || exit
-            git init
-            git remote add origin git@github.com:vem882/atm.git || true
-            git fetch origin backend
-            git reset --hard origin/backend
-            cd /home/x1dev/dev/backend || exit
+            cp -r ~/actions-runner/_work/atm/atm /var/www/development
+            /var/www/development/backend || exit
             npm install
-            cd /home/x1dev/dev/backend/bin || exit
+            cd /var/www/development/backend/bin || exit
             pm2 stop www
             pm2 start www
-          EOF
