@@ -29,6 +29,6 @@ jobs:
             git remote add origin git@github.com:vem882/atm.git || true
             git fetch origin backend
             git reset --hard origin/backend
-            cd /home/x1dev/atm/backend || exit
-            pm2 restart app
+            cd /home/x1dev/atm/backend/bin || exit
+            pm2 restart www
           EOF
