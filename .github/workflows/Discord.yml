@@ -21,4 +21,16 @@ jobs:
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "#48f442"
           username: "GitBrother"
-          message: "[ATM:Backend] 1 new commit <- [View Changes](https://github.com/${{ github.repository }}/commits/backend)"
+          message: "[ATM:Backend] new commit <- [View Changes](https://github.com/${{ github.repository }}/commits/backend)"
+
+    - uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        status: ${{ job.status }}
+        content: "uutta backendiä puskettu palvelimelle"
+        title: "deploy"
+        description: "Build and deploy to GitHub Pages"
+        color: 0x0000ff
+        url: "https://github.com/tvt24kmo-project/group_3"
+        username: GitBrother
