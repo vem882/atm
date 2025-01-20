@@ -18,7 +18,7 @@ jobs:
       # käynistetään pm2-palvelin uudelleen.
       - name: Deploy to Development
         run: |
-            cp -r ~/actions-runner/_work/atm/atm /var/www/development
+            cp -r ~/actions-runner/_work/atm/atm/backend /var/www/development/atm/backend
             /var/www/development/atm/backend || exit
             npm install
             cd /var/www/development/atm/backend/bin || exit
