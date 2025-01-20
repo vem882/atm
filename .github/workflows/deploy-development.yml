@@ -22,6 +22,11 @@ jobs:
             rsync -av --delete ~/actions-runner/_work/atm/atm/backend/ /var/www/development/atm/backend/ || exit
             cd /var/www/development/atm/backend || exit
             npm install
-            cd /var/www/development/atm/backend/bin || exit
-            pm2 stop www || true
-            pm2 start www
+      - name: Create .env file
+        run: |
+          cd /var/www/development/atm/backend || exit
+          echo "PORT=${{ secrets.ENV_port }}" >
+          echo "MYSQL_SERVER=${{ secrets.ENV_MYSQL }}" >
+          cd /var/www/development/atm/backend/bin || exit
+          pm2 stop www || true
+          pm2 start www
