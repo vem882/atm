@@ -18,6 +18,7 @@ jobs:
       # käynistetään pm2-palvelin uudelleen.
       - name: Deploy to Development
         run: |
+            mkdir -p /var/www/development/atm/backend
             rsync -av --delete ~/actions-runner/_work/atm/atm/backend/ /var/www/development/atm/backend/ || exit
             /var/www/development/atm/backend || exit
             npm install
