@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const atmController = require('../controllers/atm/atm').default;
 
-/* GET ATM page. */
-router.get('/atm', function(req, res, next) {
-  res.render('atm', { title: 'Express' });
-});
+// Reitti ATM:n sarjanumeron tarkistamiseen
+router.get('/atm/:serialNumber', atmController.checkATMSerialNumber);
 
 module.exports = router;
