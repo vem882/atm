@@ -19,8 +19,8 @@ jobs:
       - name: Deploy to Development
         run: |
             cp -r ~/actions-runner/_work/atm/atm /var/www/development
-            /var/www/development/backend || exit
+            /var/www/development/atm/backend || exit
             npm install
-            cd /var/www/development/backend/bin || exit
+            cd /var/www/development/atm/backend/bin || exit
             pm2 stop www
             pm2 start www
