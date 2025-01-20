@@ -20,7 +20,7 @@ jobs:
         run: |
             mkdir -p /var/www/development/atm/backend
             rsync -av --delete ~/actions-runner/_work/atm/atm/backend/ /var/www/development/atm/backend/ || exit
-            /var/www/development/atm/backend || exit
+            cd /var/www/development/atm/backend || exit
             npm install
             cd /var/www/development/atm/backend/bin || exit
             pm2 stop www || true
