@@ -27,6 +27,7 @@ jobs:
           cd /var/www/development/atm/backend || exit
           echo "PORT=${{ secrets.ENV_port }}" > .env
           echo "MYSQL_SERVER=${{ secrets.ENV_MYSQL }}" > .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" > .env
           cd /var/www/development/atm/backend/bin || exit
           pm2 stop www || true
           pm2 start www
