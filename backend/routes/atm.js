@@ -4,13 +4,13 @@ const authMiddleware = require('../controllers/authentication/authMiddleware');
 const { login } = require('../controllers/authentication/atmAuth');
 
 // Reitti kirjautumista varten
-router.post('/atm/:serialNumber/login', login);
+router.post('/:serialNumber/login', login);
 
 // Suojaa reitit authMiddleware:llä
-router.use('/atm/:serialNumber', authMiddleware);
+router.use('/:serialNumber', authMiddleware);
 
 // Esimerkki suojatusta reitistä
-router.get('/atm/:serialNumber/account', (req, res) => {
+router.get('/:serialNumber/account', (req, res) => {
   res.status(200).json({ message: 'Access granted', user: req.user });
 });
 
