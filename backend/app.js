@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dotenv = require('dotenv');
+const io = require('@pm2/io')
 dotenv.config({ path: '../.env' });
 
 const indexRouter = require('./routes/index');
@@ -25,4 +26,8 @@ app.use('/atm', atmRouter); // ATM-reitit
 app.use('/currency', currencyRouter);
 app.use('/transactions', transactionsRouter);
 
+io.init({
+    transactions: true, // will enable the transaction tracing
+    http: true // will enable metrics about the http server (optional)
+  })
 module.exports = app;
