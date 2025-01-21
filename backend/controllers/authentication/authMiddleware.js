@@ -8,13 +8,13 @@ const authMiddleware = (req, res, next) => {
       return res.status(401).json({ message: 'Token missing' });
     }
 
-    // tarkistetaan tokenin oikeellisuus
+    // Tarkista token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Lisää dekoodatut tiedot request-olioon
     req.user = decoded;
 
-    // jatketaan pyynnön käsittelyä
+    // Jatka pyynnön käsittelyä
     next();
   } catch (error) {
     console.error('Authentication error:', error);

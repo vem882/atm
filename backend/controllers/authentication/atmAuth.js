@@ -1,6 +1,6 @@
+const jwt = require('jsonwebtoken');
 const cardModel = require('../../models/card_model');
 const atmModel = require('../../models/atm');
-const { generateToken } = require('./tokenUtils');
 
 const login = async (req, res) => {
   const { serialNumber } = req.params;
@@ -20,7 +20,9 @@ const login = async (req, res) => {
     }
 
     // Generoi token
-    const token = generateToken(cardNumber);
+    const token = jwt.sign({ cardNumber }, process.env.JWT_SECRET, {
+      expiresIn: '5m', // Token vanhenee 5 minuutin kuluttua
+    });
 
     // Palauta token ja kortin tiedot
     res.status(200).json({
@@ -46,5 +48,5 @@ const login = async (req, res) => {
 };
 
 module.exports = {
-  login
+  login,
 };
