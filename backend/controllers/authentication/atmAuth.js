@@ -1,5 +1,5 @@
 // ATM authentikaatio moduuli, jossa määritetään miten ATM:llä kirjaudutaan sisään ja ulos
-const cardModel = require('../../models/card');
+const cardModel = require('../../models/card_model');
 const atmModel = require('../../models/atm');
 const { generateToken } = require('./tokenUtils');
 
