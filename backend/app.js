@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/atm', atmRouter);
+app.use('/atm/*', atmRouter);
 app.use('/currency', currencyRouter);
 app.use('/transactions', transactionsRouter);
 
