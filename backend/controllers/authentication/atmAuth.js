@@ -1,4 +1,3 @@
-// ATM authentikaatio moduuli, jossa määritetään miten ATM:llä kirjaudutaan sisään ja ulos
 const cardModel = require('../../models/card_model');
 const atmModel = require('../../models/atm');
 const { generateToken } = require('./tokenUtils');
@@ -20,7 +19,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid card number or PIN' });
     }
 
-    // Generoidaan tokeni
+    // Generoi token
     const token = generateToken(cardNumber);
 
     // Palauta token ja kortin tiedot
@@ -47,5 +46,5 @@ const login = async (req, res) => {
 };
 
 module.exports = {
-  login,
+  login
 };

@@ -6,7 +6,6 @@ const dotenv=require('dotenv');
 dotenv.config({ path: '../.env' });
 
 var indexRouter = require('./routes/index');
-var atmRouter = require('./routes/atm');
 var currencyRouter = require('./routes/currency');
 var transactionsRouter = require('./routes/transactions');
 var usersRouter = require('./routes/users');
@@ -22,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/atm/*', atmRouter);
+app.use('/atm', require('./routes/atm'));
 app.use('/currency', currencyRouter);
 app.use('/transactions', transactionsRouter);
 
