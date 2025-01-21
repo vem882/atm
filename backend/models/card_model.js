@@ -6,7 +6,7 @@ const getCardByNumberAndPin = async (cardNumber, pin) => {
     FROM card c
     JOIN account a ON c.idaccount = a.idaccount
     JOIN customer cu ON a.idcustomer = cu.idcustomer
-    WHERE c.card_number = ? AND c.pin = ? AND c.status = 1 AND c.valid >= CURDATE()
+    WHERE c.card_number = ? AND c.pin = ?
   `;
   return new Promise((resolve, reject) => {
     connection.query(query, [cardNumber, pin], (error, results) => {
