@@ -1,8 +1,16 @@
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0; 
+  padding: 0; 
+  height: 100vh; 
+  overflow: hidden; 
+  background-image: url('bg.gif'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-color: black; 
 }
 
-a {
-  color: #00B7FF;
+html {
+  height: 100%; 
 }
