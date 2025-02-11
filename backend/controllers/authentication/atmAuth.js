@@ -35,7 +35,7 @@ console.log('Login request received:', req.params, req.body);
         cardType: card.card_type,
         attempts: card.attempts,
         issued: card.issued,
-        expires: card.expires,
+        valid: card.valid,
         status: card.status,
         account: {
           accountNumber: card.account_number,
