@@ -29,6 +29,7 @@ console.log('Login request received:', req.params, req.body);
 
     // Palauta token ja kortin tiedot
     res.status(200).json({
+      atm,
       token,
       card: {
         cardNumber: card.card_number,
