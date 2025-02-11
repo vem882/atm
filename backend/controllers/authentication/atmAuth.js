@@ -33,11 +33,17 @@ console.log('Login request received:', req.params, req.body);
       card: {
         cardNumber: card.card_number,
         cardType: card.card_type,
+        attempts: card.attempts,
+        issued: card.issued,
+        expires: card.expires,
+        status: card.status,
         account: {
           accountNumber: card.account_number,
           accountID: card.idaccount,
           balance: card.balance,
-          currency: card.currency_type,
+          currency: card.currency_id,
+          
+
         },
         customer: {
           firstName: card.fname,
