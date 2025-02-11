@@ -35,6 +35,7 @@ console.log('Login request received:', req.params, req.body);
         cardType: card.card_type,
         account: {
           accountNumber: card.account_number,
+          accountID: card.idaccount,
           balance: card.balance,
           currency: card.currency_type,
         },

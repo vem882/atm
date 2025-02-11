@@ -14,12 +14,12 @@ const AccountModel = {
     return rows[0]?.credit_limit; // Return credit_limit if available
   },
   
-  // Get account's credit limit by account ID
+ /* // Get account's credit limit by account ID - kommitettu koska tupla
   async getLimit(accountId) {
     const query = `SELECT account_type FROM account WHERE id_account = ?`;
     const [rows] = await db.execute(query, [accountId]);
     return rows[0]?.account_type;  // Return type if available example debit, credit?
-  },
+  },*/
 
 };
 
