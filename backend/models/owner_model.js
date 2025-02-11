@@ -1,1 +1,1 @@
-//owner tietokantaan liittyvät kutsut
+//  customer tietokantaan liittyvät kutsut 

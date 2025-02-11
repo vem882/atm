@@ -17,7 +17,11 @@ const getCardByNumberAndPin = async (cardNumber, pin) => {
     });
   });
 };
-
+/*
+const bcrypt = require("bcrypt");
+kryptattu pin coodi
+bcrypt.hash()
+*/
 module.exports = {
   getCardByNumberAndPin,
 };
