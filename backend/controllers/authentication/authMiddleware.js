@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const atmModel = require('../../models/atmModel'); // Olettaen, että sinulla on ATM-malli
+const atmModel = require('../../models/atm'); // Olettaen, että sinulla on ATM-malli
 
 const authMiddleware = async (req, res, next) => {
   try {
