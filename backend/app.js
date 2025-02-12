@@ -15,6 +15,10 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
+// Swagger-dokumentaatio
+const setupSwagger = require('./swagger');
+setupSwagger(app);
+
 // Käytetään middlewarejä välikädet
 app.use(logger('dev'));
 app.use(express.json());
