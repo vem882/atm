@@ -1,50 +1,44 @@
-const dbConfig = require('../controllers/db/database'); // Adjust the path as needed
+const connection = require('../controllers/db/database'); // Adjust the path as needed
 
-async function updateCurrencyRates(rates) {
-    const connection = await mysql.createConnection(dbConfig);
+const updateCurrencyRates = async (rates) => {
+  const querySelect = 'SELECT * FROM currency WHERE currency_type = ?';
+  const queryInsert = 'INSERT INTO currency (currency_type, currency_value) VALUES (?, ?)';
+  const queryUpdate = 'UPDATE currency SET currency_value = ? WHERE currency_type = ?';
 
+  return new Promise(async (resolve, reject) => {
     try {
-        for (const [currencyCode, rate] of Object.entries(rates)) {
-            const [rows] = await connection.execute(
-                'SELECT * FROM currency WHERE currency_type = ?',
-                [currencyCode]
-            );
+      for (const [currencyCode, rate] of Object.entries(rates)) {
+        const [rows] = await connection.promise().query(querySelect, [currencyCode]);
 
-            if (rows.length === 0) {
-                await connection.execute(
-                    'INSERT INTO currency (currency_type, currency_value) VALUES (?, ?)',
-                    [currencyCode, rate]
-                );
-            } else {
-                await connection.execute(
-                    'UPDATE currency SET currency_value = ? WHERE currency_type = ?',
-                    [rate, currencyCode]
-                );
-            }
+        if (rows.length === 0) {
+          await connection.promise().query(queryInsert, [currencyCode, rate]);
+        } else {
+          await connection.promise().query(queryUpdate, [rate, currencyCode]);
         }
+      }
+      resolve();
     } catch (error) {
-        console.error('Error updating currency rates:', error);
-        throw error;
-    } finally {
-        await connection.end();
+      console.error('Error updating currency rates:', error);
+      reject(error);
     }
-}
+  });
+};
 
-async function getCurrencies() {
-    const connection = await mysql.createConnection(dbConfig);
+const getCurrencies = async () => {
+  const query = 'SELECT * FROM currency';
 
-    try {
-        const [rows] = await connection.execute('SELECT * FROM currency');
-        return rows;
-    } catch (error) {
+  return new Promise((resolve, reject) => {
+    connection.query(query, (error, results) => {
+      if (error) {
         console.error('Error fetching currencies:', error);
-        throw error;
-    } finally {
-        await connection.end();
-    }
-}
+        return reject(error);
+      }
+      resolve(results);
+    });
+  });
+};
 
 module.exports = {
-    updateCurrencyRates,
-    getCurrencies
+  updateCurrencyRates,
+  getCurrencies
 };
