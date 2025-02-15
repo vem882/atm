@@ -35,6 +35,17 @@ const authMiddleware = require('../controllers/authentication/authMiddleware');
  *               properties:
  *                 token:
  *                   type: string
+ *                 atm:
+ *                   type: object
+ *                   properties:
+ *                     idatm:
+ *                       type: integer
+ *                     serial_number:
+ *                       type: string
+ *                     ip_address:
+ *                       type: string
+ *                     location:
+ *                       type: string
  *                 card:
  *                   type: object
  *                   properties:
@@ -42,15 +53,27 @@ const authMiddleware = require('../controllers/authentication/authMiddleware');
  *                       type: string
  *                     cardType:
  *                       type: string
+ *                     attempts:
+ *                       type: integer
+ *                     issued:
+ *                       type: string
+ *                       format: date-time
+ *                     valid:
+ *                       type: string
+ *                       format: date-time
+ *                     status:
+ *                       type: integer
  *                     account:
  *                       type: object
  *                       properties:
  *                         accountNumber:
  *                           type: string
+ *                         accountID:
+ *                           type: integer
  *                         balance:
- *                           type: number
- *                         currency:
  *                           type: string
+ *                         currency:
+ *                           type: integer
  *                     customer:
  *                       type: object
  *                       properties:
@@ -85,6 +108,18 @@ router.post('/:serialNumber/login', login);
  *     responses:
  *       200:
  *         description: Account details retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     cardNumber:
+ *                       type: string
  *       401:
  *         description: Unauthorized
  *       404:
