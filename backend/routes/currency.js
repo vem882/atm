@@ -34,7 +34,7 @@ const { getCurrencies } = require('../models/currency_model');
  *       500:
  *         description: Internal server error
  */
-router.get('/currency', async function(req, res, next) {
+router.get('/', async function(req, res, next) {
   try {
     const currencies = await getCurrencies();
     res.status(200).json(currencies);
