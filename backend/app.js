@@ -33,4 +33,14 @@ app.use('/atm', atmRouter);
 app.use('/currency', currencyRouter);
 app.use('/transactions', transactionsRouter); // lisäsin
 
+// 404-virheet
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+});
+
+// 500-virheet
+app.use((err, req, res, next) => {
+  res.status(500).send('500 - Internal Server Error');
+});
+
 module.exports = app;
