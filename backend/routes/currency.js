@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const { getCurrencyRate } = require('../../controllers/currency/currency');
 const { getCurrencies } = require('../../models/currency_model');
 
 /**
