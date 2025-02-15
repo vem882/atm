@@ -44,4 +44,26 @@ router.get('/', async function(req, res, next) {
   }
 });
 
+/**
+ * @swagger
+ * /currency/now:
+ *   get:
+ *     summary: Update currency rates immediately
+ *     description: Fetch and update the latest currency rates immediately
+ *     responses:
+ *       200:
+ *         description: Currency rates updated successfully
+ *       500:
+ *         description: Internal server error
+ */
+router.get('/now', async function(req, res, next) {
+  try {
+    await getCurrencyRate(true);
+    res.status(200).json({ message: 'Currency rates updated successfully' });
+  } catch (error) {
+    console.error('Error updating currency rates:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;

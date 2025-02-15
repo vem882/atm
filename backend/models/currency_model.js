@@ -1,6 +1,6 @@
 const connection = require('../controllers/db/database'); // Adjust the path as needed
 
-const updateCurrencyRates = async (rates) => {
+const updateCurrencyRates = async (rates, forceUpdate) => {
   const querySelect = 'SELECT * FROM currency WHERE currency_type = ?';
   const queryInsert = 'INSERT INTO currency (currency_type, currency_value) VALUES (?, ?)';
   const queryUpdate = 'UPDATE currency SET currency_value = ? WHERE currency_type = ?';
@@ -12,7 +12,7 @@ const updateCurrencyRates = async (rates) => {
 
         if (rows.length === 0) {
           await connection.promise().query(queryInsert, [currencyCode, rate]);
-        } else {
+        } else if (forceUpdate) {
           await connection.promise().query(queryUpdate, [rate, currencyCode]);
         }
       }
