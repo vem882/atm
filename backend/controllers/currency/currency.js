@@ -10,7 +10,7 @@ const API_URL = 'https://v6.exchangerate-api.com/v6/' + process.env.exchangerate
 
 // Predefined list of common currency symbols
 const currencySymbols = {
-    "EUR": "€",      // Euro
+    "EUR": "€",      // Euro 
     "AED": "د.إ",    // Arabiemiirikuntien dirhami
     "AFN": "؋",      // Afganistanin afgaani
     "ALL": "L",      // Albanian lek
