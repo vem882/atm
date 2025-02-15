@@ -1,27 +1,31 @@
-//Currency moduli hakee valuuttakurssin API:sta ja palauttaa sen. Jos valuuttakurssia ei löydy, saadaan virhe.
+//Currency moduli hakee valuuttakurssin API:sta ja palauttaa sen. Jos valuuttakurssia ei löydy, saadaan virhe。
 // Jotta Free planin kutsujen määrä ei ylittysi, varmaan hyvä toteuttaa jokin cache(välimuisti), 
 // jota päivitetään esim kerran päivässä
 
 const axios = require('axios');
-// API URL viedään myöhemmin env-tiedostoon ja otetaan sieltä käyttöön.
-const API_URL = 'https://api.exchangerate-api.com/v4/latest/';
+const dotenv=require('dotenv');
+dotenv.config();
+const { updateCurrencyRates } = require('../../models/currency_model'); // Assuming you have a MySQL model for Currency
+const API_URL = 'https://v6.exchangerate-api.com/v6/' + process.env.exchangerate_apikey +'/latest/EUR';
+const BASE_CURRENCY = 'EUR';
 
-async function getCurrencyRate(baseCurrency, targetCurrency) {
+async function getCurrencyRate() {
     try {
-        const response = await axios.get(`${API_URL}${baseCurrency}`);
-        const rates = response.data.rates;
-        const rate = rates[targetCurrency];
+        const response = await axios.get(`${API_URL}${BASE_CURRENCY}`);
+        const rates = response.data.conversion_rates;
 
-        if (!rate) {
-            throw new Error(`Rate for ${targetCurrency} not found`);
-        }
+        await updateCurrencyRates(rates);
 
-        return rate;
+        console.log('Currency rates updated successfully');
     } catch (error) {
-        console.error('Error fetching currency rate:', error);
+        console.error('Error fetching currency rates:', error);
         throw error;
     }
 }
+
+// Schedule the fetchAndUpdateCurrencyRates function to run once a day
+const schedule = require('node-schedule');
+schedule.scheduleJob('0 0 * * *', getCurrencyRate); // Runs every day at midnight
 
 module.exports = {
     getCurrencyRate

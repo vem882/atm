@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const { getCurrencyRate } = require('../../controllers/currency/currency');
+const { getCurrencies } = require('../../models/currency_model');
 
 /**
  * @swagger
@@ -32,8 +34,14 @@ var router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.get('/currency', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/currency', async function(req, res, next) {
+  try {
+    const currencies = await getCurrencies();
+    res.status(200).json(currencies);
+  } catch (error) {
+    console.error('Error fetching currencies:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 module.exports = router;

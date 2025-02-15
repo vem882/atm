@@ -29,5 +29,6 @@ jobs:
           echo "PORT=${{ secrets.ENV_port }}" > .env
           echo "MYSQL_SERVER=${{ secrets.ENV_MYSQL }}" >> .env
           echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "exchangerate_apikey=${{ secrets.EXCHANGERATE_APIKEY }}" >> .env
           pm2 stop www || true
           npm start
