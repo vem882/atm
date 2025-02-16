@@ -9,14 +9,14 @@ const authMiddleware = async (req, res, next) => {
       return res.status(401).json({ message: 'Token missing' });
     }
 
-    // Tarkista token
+    // tarkistetaan tokeni
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Lisää dekoodatut tiedot request-olioon
     req.user = decoded;
 
-    // Hae ATM:n sarjanumero pyynnöstä 
-    const { serialNumber } = req.body; 
+    // Hae ATM:n sarjanumero headerista
+    const serialNumber = req.headers['serialnumber']; // Headerista 'serialnumber'
     if (!serialNumber) {
       return res.status(400).json({ message: 'Serial number missing' });
     }
