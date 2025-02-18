@@ -32,6 +32,7 @@ console.log('Login request received:', req.params, req.body);
       atm,
       token,
       card: {
+        cardID: card.idcard,
         cardNumber: card.card_number,
         cardType: card.card_type,
         attempts: card.attempts,
@@ -40,8 +41,10 @@ console.log('Login request received:', req.params, req.body);
         status: card.status,
         account: {
           accountNumber: card.account_number,
+          accountType: card.account_type,
           accountID: card.idaccount,
           balance: card.balance,
+          credit_limit: card.credit_limit,
           currency: card.currency_id,
           
 
