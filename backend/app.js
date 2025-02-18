@@ -11,7 +11,6 @@ const indexRouter = require('./routes/index');
 const atmRouter = require('./routes/atm');
 const currencyRouter = require('./routes/currency');
 const transactionsRouter = require('./routes/transactions'); // lisäsin
-const usersRouter = require('./routes/users');
 
 const app = express();
 
@@ -28,7 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Määritetään reitit
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/atm', atmRouter); 
 app.use('/currency', currencyRouter);
 app.use('/transactions', transactionsRouter); // lisäsin

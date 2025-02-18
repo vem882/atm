@@ -1,1 +1,0 @@
-//  customer tietokantaan liittyvät kutsut 
