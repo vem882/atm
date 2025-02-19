@@ -11,7 +11,7 @@ if (!connection) {
     throw new Error('MYSQL_SERVER environment variable is not defined');
   }
    
-  // console.log('Using MySQL connection string:', connection);
+  //console.log('Using MySQL connection string:', connection);
 
   connection.getConnection((err, connection) => {
     if (err) {
