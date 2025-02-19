@@ -21,7 +21,7 @@ jobs:
             mkdir -p /var/www/development/atm/backend
             rsync -av --delete ~/actions-runner/_work/atm/atm/backend/ /var/www/development/atm/backend/ || exit
             cd /var/www/development/atm/backend || exit
-            npm install
+            npm install 
       - name: Create .env file
         run: |
           cd /var/www/development/atm/backend || exit
