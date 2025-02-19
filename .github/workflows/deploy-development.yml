@@ -1,0 +1,34 @@
+name: dev-oracle
+
+on:
+  push:
+    branches:
+      - backend
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 3. Lähetetään uudet tiedostot palvelimelle ja kasataan dev-ympäristössä. 
+      # siirytään kansioon /var/www/development, johon haetaan repositorysta uusin backend-haara.
+      # käynistetään pm2-palvelin uudelleen.
+      - name: Deploy to Development
+        run: |
+            mkdir -p /var/www/development/atm/backend
+            rsync -av --delete ~/actions-runner/_work/atm/atm/backend/ /var/www/development/atm/backend/ || exit
+            cd /var/www/development/atm/backend || exit
+            npm install 
+      - name: Create .env file
+        run: |
+          cd /var/www/development/atm/backend || exit
+          touch .env
+          echo "PORT=${{ secrets.ENV_port }}" > .env
+          echo "MYSQL_SERVER=${{ secrets.ENV_MYSQL }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+          echo "exchangerate_apikey=${{ secrets.EXCHANGERATE_APIKEY }}" >> .env
+          pm2 stop www || true
+          npm start
