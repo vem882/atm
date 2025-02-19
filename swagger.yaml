@@ -161,6 +161,15 @@ paths:
                       description: The symbol of the currency (e.g., $, €)
         '500':
           description: Internal server error
+  /currency/now:
+    get:
+      summary: Update currency rates immediately
+      description: Fetch and update the latest currency rates immediately
+      responses:
+        '200':
+          description: Currency rates updated successfully
+        '500':
+          description: Internal server error
   /transactions/history/{account_id}:
     get:
       summary: Get transaction history for an account

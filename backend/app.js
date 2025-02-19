@@ -11,6 +11,7 @@ const indexRouter = require('./routes/index');
 const atmRouter = require('./routes/atm');
 const currencyRouter = require('./routes/currency');
 const transactionsRouter = require('./routes/transactions'); // lisäsin
+const cardRouter = require('./routes/card');
 
 const app = express();
 
@@ -30,6 +31,9 @@ app.use('/', indexRouter);
 app.use('/atm', atmRouter); 
 app.use('/currency', currencyRouter);
 app.use('/transactions', transactionsRouter); // lisäsin
+app.use('/card',cardRouter);
+
+
 
 // 404-virheet
 app.use((req, res) => {
