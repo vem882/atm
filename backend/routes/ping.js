@@ -41,7 +41,7 @@ const checkATMAvailability = require('../controllers/atm/atm');
  *       500:
  *         description: Internal server error
  */
-router.get('/', checkATMAvailability, (req, res) => {
+router.get('/', checkATMAvailability (req, res) => {
     res.status(200).json({ message: 'Access granted', atm: req.atm });
   });
 
