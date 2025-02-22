@@ -23,7 +23,7 @@ const { checkATMAvailabilityBySN } = require('../controllers/atm/ping');
  *             schema:
  *               type: object
  *               properties:
- *                 available:
+ *                 sn:
  *                   type: boolean
  *                   example: true
  *                 atm:
@@ -37,8 +37,8 @@ const { checkATMAvailabilityBySN } = require('../controllers/atm/ping');
  *                       type: string
  *                     location:
  *                       type: string
- *       404:
- *         description: ATM is not available
+ *       401:
+ *         description: ATM is not registered
  *       500:
  *         description: Internal server error
  */
@@ -52,13 +52,13 @@ router.get('/', async (req, res) => {
         const atmAvailability = await checkATMAvailabilityBySN(serialNumber);
         if (atmAvailability) {
             res.status(200).json({
-                available: true,
-                atm: atmAvailability
+                sn: true,
+                //atm: atmAvailability
             });
         } else {
-            res.status(404).json({
-                available: false,
-                message: 'ATM not available'
+            res.status(401).json({
+                sn: false,
+                message: 'ATM is not registered'
             });
         }
     } catch (error) {
