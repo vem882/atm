@@ -7,25 +7,11 @@ const getATMBySerialNumber = async (serialNumber) => {
       if (error) {
         return reject(error);
       }
-      resolve(results[0]); // Palauta ensimmäinen tulos
+      resolve(results[0]); // Return the first result
     });
   });
 };
-
-const checkATMAvailabilityBySN = async (serialNumber) => {
-  const query = 'SELECT * FROM atm WHERE serial_number = ?';
-  return new Promise((resolve, reject) => {
-    connection.query(query, [serialNumber], (error, results) => {
-      if (error) {
-        return reject(error);
-      }
-      resolve(results[0]); // Palauta ensimmäinen tulos
-    });
-  });
-};
-
 
 module.exports = {
   getATMBySerialNumber,
-  checkATMAvailabilityBySN,
 };
