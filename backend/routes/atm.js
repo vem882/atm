@@ -172,6 +172,6 @@ router.get('/:serialNumber/account', authMiddleware, (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.get('/:serialNumber/ping', checkATMSerialNumber);
+router.get('/ping', checkATMSerialNumber);
 
 module.exports = router;
