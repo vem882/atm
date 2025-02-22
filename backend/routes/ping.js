@@ -4,12 +4,12 @@ const { checkATMAvailabilityBySN } = require('../controllers/atm/ping');
 
 /**
  * @swagger
- * /{serialNumber}/ping:
+ * /ping:
  *   get:
  *     summary: Check ATM availability
  *     description: Check if the ATM with the given serial number is available
  *     parameters:
- *       - in: path
+ *       - in: header
  *         name: serialNumber
  *         required: true
  *         schema:
@@ -42,9 +42,13 @@ const { checkATMAvailabilityBySN } = require('../controllers/atm/ping');
  *       500:
  *         description: Internal server error
  */
-router.get('/:serialNumber/ping', async (req, res) => {
+router.get('/ping', async (req, res) => {
     try {
-        const serialNumber = req.params.serialNumber;
+        const serialNumber = req.headers.serialnumber;
+        if (!serialNumber) {
+            return res.status(400).json({ message: 'serialNumber header is required' });
+        }
+
         const atmAvailability = await checkATMAvailabilityBySN(serialNumber);
         if (atmAvailability) {
             res.status(200).json({
