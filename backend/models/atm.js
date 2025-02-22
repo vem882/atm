@@ -12,7 +12,7 @@ const getATMBySerialNumber = async (serialNumber) => {
   });
 };
 
-const checkATMAvailability = async (serialNumber) => {
+const checkATMAvailabilityBySN = async (serialNumber) => {
   const query = 'SELECT * FROM atm WHERE serial_number = ?';
   return new Promise((resolve, reject) => {
     connection.query(query, [serialNumber], (error, results) => {
@@ -27,5 +27,5 @@ const checkATMAvailability = async (serialNumber) => {
 
 module.exports = {
   getATMBySerialNumber,
-  checkATMAvailability,
+  checkATMAvailabilityBySN,
 };
