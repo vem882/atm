@@ -58,3 +58,5 @@ router.get('/ping', (req, res) => {
       }
     });
   });
+
+  module.exports = router;
