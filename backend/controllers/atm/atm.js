@@ -21,7 +21,7 @@ const checkATMSerialNumber = (req, res) => {
 const checkATMAvailability = (req, res) => {
   const { serialNumber } = req.params;
 
-const atmModel.checkATMAvailabilityBySN = (serialNumber, callback) => {
+ atmModel.checkATMAvailabilityBySN = (serialNumber, callback) => {
   if (error) {
     return res.status(500).json({ error: 'Database query failed' });
   }
