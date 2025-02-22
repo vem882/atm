@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { checkATMAvailability  } = require('../controllers/atm/atm');
+const checkATMAvailability = require('../controllers/atm/atm');
 /**
  * @swagger
  * /atm/{serialNumber}/ping:
@@ -41,8 +41,8 @@ const { checkATMAvailability  } = require('../controllers/atm/atm');
  *       500:
  *         description: Internal server error
  */
-router.get('/', checkATMAvailability, (_req, res) => {
-    res.status(200).json({ message: 'S/N ok' });
+router.get('/', checkATMAvailability, (req, res) => {
+    res.status(200).json({ message: 'Access granted', atm: req.atm });
   });
 
   module.exports = router;
