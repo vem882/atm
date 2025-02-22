@@ -1,3 +1,5 @@
+const express = require('express');
+const router = express.Router();
 const { login } = require('../controllers/authentication/atmAuth');
 const authMiddleware = require('../controllers/authentication/authMiddleware');
 /**
