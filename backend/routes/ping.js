@@ -42,7 +42,7 @@ const { checkATMAvailabilityBySN } = require('../controllers/atm/ping');
  *       500:
  *         description: Internal server error
  */
-router.get('/ping', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const serialNumber = req.headers.serialnumber;
         if (!serialNumber) {
