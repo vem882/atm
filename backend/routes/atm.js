@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { login } = require('../controllers/authentication/atmAuth');
 const authMiddleware = require('../controllers/authentication/authMiddleware');
+const { checkATMSerialNumber } = require('../controllers/atm/atm');
 /**
  * @swagger
  * /atm/{serialNumber}/login:
@@ -129,5 +130,48 @@ router.post('/:serialNumber/login', login);
 router.get('/:serialNumber/account', authMiddleware, (req, res) => {
   res.status(200).json({ message: 'Access granted', user: req.user });
 });
+
+
+/**
+ * @swagger
+ * /atm/{serialNumber}/ping:
+ *   get:
+ *     summary: Check ATM availability
+ *     description: Check if the ATM with the given serial number is available
+ *     parameters:
+ *       - in: path
+ *         name: serialNumber
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ATM serial number
+ *     responses:
+ *       200:
+ *         description: ATM is available
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: ATM serial number is registered
+ *                 atm:
+ *                   type: object
+ *                   properties:
+ *                     idatm:
+ *                       type: integer
+ *                     serial_number:
+ *                       type: string
+ *                     ip_address:
+ *                       type: string
+ *                     location:
+ *                       type: string
+ *       404:
+ *         description: ATM serial number is not registered
+ *       500:
+ *         description: Internal server error
+ */
+router.get('/:serialNumber/ping', checkATMSerialNumber);
 
 module.exports = router;
