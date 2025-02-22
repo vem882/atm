@@ -41,22 +41,8 @@ const { checkATMAvailability  } = require('../controllers/atm/atm');
  *       500:
  *         description: Internal server error
  */
-router.get('/ping', (req, res) => {
-    const serialNumber = req.headers['serialnumber']; // Headerista 'serialnumber'
-    if (!serialNumber) {
-      return res.status(400).json({ message: 'Serial number missing' });
-    }
-  
-    checkATMAvailability(serialNumber, (error, result) => {
-      if (error) {
-        return res.status(500).json({ error: 'Database query failed' });
-      }
-      if (result.available) {
-        return res.status(200).json(result);
-      } else {
-        return res.status(404).json({ message: 'ATM serial number is not registered' });
-      }
-    });
+router.get('/ping', checkATMAvailability, (req, res) => {
+    res.status(200).json({ message: 'S/N ok' });
   });
 
   module.exports = router;
