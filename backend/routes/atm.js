@@ -213,8 +213,11 @@ router.get('/:serialNumber/account', authMiddleware, (req, res) => {
  *       500:
  *         description: Internal server error
  */
-router.get('/:serialNumber/ping', (req, res) => {
-  const { serialNumber } = req.params;
+router.get('/ping', (req, res) => {
+  const serialNumber = req.headers['serialnumber']; // Headerista 'serialnumber'
+  if (!serialNumber) {
+    return res.status(400).json({ message: 'Serial number missing' });
+  }
 
   checkATMAvailability(serialNumber, (error, result) => {
     if (error) {
