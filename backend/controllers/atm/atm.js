@@ -20,7 +20,6 @@ const checkATMSerialNumber = (req, res) => {
 };
 
 const checkATMAvailability = (serialNumber, callback) => {
-  atmModel.getATMBySerialNumber(serialNumber, (error, results) => {
     if (error) {
       return callback(error, null);
     }
@@ -29,8 +28,7 @@ const checkATMAvailability = (serialNumber, callback) => {
     } else {
       return callback(null, { available: false });
     }
-  });
-};
+  };
 
 module.exports = {
   checkATMSerialNumber,
