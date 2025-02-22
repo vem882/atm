@@ -25,9 +25,9 @@ const checkATMAvailability = (serialNumber, callback) => {
       return callback(error, null);
     }
     if (results.length > 0) {
-      return callback(null, { available: true, atm: results[0] });
+      return res.status(200).json({ message: 'ATM serial number is registered', atm: results[0] });
     } else {
-      return callback(null, { available: false });
+      return res.status(404).json({ message: 'ATM serial number is not registered' });
     }
   });
 };
