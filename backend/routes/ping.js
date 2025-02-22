@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const  { checkATMAvailabilityBySN } = require('../controllers/atm/ping');
+const { checkATMAvailabilityBySN } = require('../controllers/atm/ping');
+
 /**
  * @swagger
  * /atm/{serialNumber}/ping:
@@ -41,16 +42,27 @@ const  { checkATMAvailabilityBySN } = require('../controllers/atm/ping');
  *       500:
  *         description: Internal server error
  */
-
-router.get('/', async function(req, res, next) {
+router.get('/', async (req, res) => {
     try {
-      const checkATMAvailability = await checkATMAvailabilityBySN();
-      res.status(200).json(checkATMAvailability);
+        const serialNumber = req.params.serialNumber;
+        const atmAvailability = await checkATMAvailabilityBySN(serialNumber);
+        if (atmAvailability) {
+            res.status(200).json({
+                available: true,
+                atm: atmAvailability
+            });
+        } else {
+            res.status(404).json({
+                available: false,
+                message: 'ATM not available'
+            });
+        }
     } catch (error) {
-      console.error('Error fetching currencies:', error);
-      res.status(500).json({ error: 'Internal server error' });
+        console.error('Error checking ATM availability:', error);
+        res.status(500).json({
+            message: 'Internal server error'
+        });
     }
-  });
-  
+});
 
-  module.exports = router;
+module.exports = router;
