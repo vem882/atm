@@ -1,4 +1,4 @@
-const atmModel = require('../../models/atm');
+const atmModel = require('../../models/atm_model');
 
 
 // Funktio, joka tarkistaa onko ATM:n sarjanumero rekisteröity

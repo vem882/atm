@@ -1,4 +1,4 @@
-const { getATMBySerialNumber } = require('../../models/atm');
+const { getATMBySerialNumber } = require('../../models/atm_model');
 
 async function checkATMAvailabilityBySN(serialNumber) {
     try {
