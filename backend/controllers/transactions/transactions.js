@@ -15,12 +15,14 @@ const depositHandler = async (req, res) => {
 const withdrawHandler = async (req, res) => {
   try {
     const { account_id, amount, idatm, idcard } = req.body;
-    const result = await withdraw(account_id, amount, idatm, idcard);
+    const negativeAmount = -Math.abs(amount); // Ensure the amount is negative
+    const result = await withdraw(account_id, negativeAmount, idatm, idcard);
     res.status(200).json({ message: 'Withdraw successful', data: result });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // transfer handler
 const transferHandler = async (req, res) => {
