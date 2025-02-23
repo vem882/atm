@@ -77,6 +77,9 @@ console.log('Login request received:', req.params, req.body);
           firstName: card.fname,
           lastName: card.lname,
         },
+        currency: {
+          currency_symbol: card.currency_symbol
+        }
       },
     });
   } catch (error) {
