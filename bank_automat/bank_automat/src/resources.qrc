@@ -1,0 +1,17 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/Icons">
+        <file>Icons/checkmark.png</file>
+        <file>Icons/undo.png</file>
+        <file>Icons/X.png</file>
+        <file>Icons/en.png</file>
+        <file>Icons/fi.png</file>
+        <file>Icons/sv.png</file>
+    </qresource>
+
+    <qresource prefix="/translations">
+        <file>translations/translations_en.qm</file>
+        <file>translations/translations_fi.qm</file>
+        <file>translations/translations_sv.qm</file>
+    </qresource>
+</RCC>

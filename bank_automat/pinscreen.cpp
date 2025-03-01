@@ -2,6 +2,7 @@
 #include "ui_pinscreen.h"
 #include <QTimer>
 #include "mainwindow.h"
+#include "checker.h"
 
 PinScreen::PinScreen(MainWindow *parent)
     : QDialog(parent)
@@ -9,14 +10,42 @@ PinScreen::PinScreen(MainWindow *parent)
     , mainWindow(parent)
 {
     ui->setupUi(this);
-    ui -> textPin -> setReadOnly(true);
-    ui -> textPinInfo -> clear();
+
+    // Connect signals from MainWindow to PinScreen slots
+    connect(mainWindow, &MainWindow::loginSuccessful,
+            this, &PinScreen::closeOnSuccess);
+    connect(mainWindow, &MainWindow::loginFailed,
+            this, &PinScreen::showErrorMessage);
+
+    pinMessageTimer = new QTimer(this);
+    pinMessageTimer->setSingleShot(true);
+    connect(pinMessageTimer, &QTimer::timeout, this, [this]() {
+        ui->textPinInfo->clear();
+    });
+    ui->textPin->setReadOnly(true);
+
+    Checker checker;
+    checker.checkResourceFile(":/Icons/Icons/checkmark.png");
+    checker.checkResourceFile(":/Icons/Icons/undo.png");
+    checker.checkResourceFile(":/Icons/Icons/X.png");
+
+    QPixmap checkmarkIcon(":/Icons/Icons/checkmark.png");
+    QPixmap undoIcon(":/Icons/Icons/undo.png");
+    QPixmap xIcon(":/Icons/Icons/X.png");
+
+    ui->btnConfirmPin->setIcon(checkmarkIcon);
+    ui->btnClearPin->setIcon(xIcon);
+    ui->btnUndoPin->setIcon(undoIcon);
+
+    ui->btnConfirmPin->setStyleSheet("QPushButton { icon-size: 30px 30px; }");
+    ui->btnClearPin->setStyleSheet("QPushButton { icon-size: 30px 30px; }");
 }
 
 PinScreen::~PinScreen()
 {
     delete ui;
 }
+
 
 void PinScreen::on_btnPinNum1_clicked()
 {
@@ -80,53 +109,32 @@ void PinScreen::on_btnPinNum0_clicked()
 
 void PinScreen::on_btnConfirmPin_clicked()
 {
-    QString enteredPin = ui -> textPin -> text();
-    QString correctPin = "1234"; //hardcoded test pin
+    QString enteredPin = ui->textPin->text();
+    QString cardNumber = mainWindow->getCardNumber();
 
-    if (enteredPin == correctPin)
+    pinMessageTimer->stop();
+
+    mainWindow->initiateLogin(cardNumber, enteredPin);
+
+}
+
+// Handle success
+void PinScreen::closeOnSuccess()
+{
+    // Close the PIN screen (ends the exec() loop)
+    accept();
+    if (mainWindow)
     {
-        ui -> textPinInfo -> setText("PIN correct");
-        ui -> textPinInfo -> setStyleSheet("color: green;");
-        pinAttempts = 3;
-
-        QTimer::singleShot(3000, this, [this]()
-        {
-            ui -> textPinInfo -> clear();
-        });
-
-        if (mainWindow)
-        {
-            mainWindow -> updateUIForDebitCredit();
-        }
-
-        this -> close();
-    }
-    else
-    {
-        pinAttempts--;
-        if (pinAttempts > 0)
-        {
-            ui -> textPinInfo -> setText(QString("Invalid PIN. %1 attempts remaining.").arg(pinAttempts));
-            ui -> textPinInfo -> setStyleSheet("color: red;");
-            ui -> textPin -> clear();
-            QTimer::singleShot(3000, this, [this]()
-            {
-                ui -> textPinInfo -> clear();
-            });
-        }
-        else
-        {
-            ui -> textPinInfo -> setText("Invalid PIN. No attempts remaining. Account locked");
-            ui -> textPinInfo -> setStyleSheet("color: red;");
-            ui -> textPin -> clear();
-            QTimer::singleShot(5000, this, [this]()
-            {
-                ui -> textPinInfo -> clear();
-            });
-        }
+        mainWindow -> updateUIForDebitCredit();
     }
 }
 
+// Handle failure
+void PinScreen::showErrorMessage()
+{
+    ui->textPinInfo->setText("Login failed");
+    pinMessageTimer->start(3000);
+}
 
 void PinScreen::on_btnClearPin_clicked()
 {
@@ -147,5 +155,11 @@ void PinScreen::on_btnUndoPin_clicked()
 
 void PinScreen::on_btnExit_clicked()
 {
-    QCoreApplication::quit();
+    this -> close();
+}
+
+
+void PinScreen::resetPinMessageTimer(int timeout)
+{
+    pinMessageTimer -> start(timeout);
 }

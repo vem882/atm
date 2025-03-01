@@ -2,6 +2,7 @@
 #define PINSCREEN_H
 
 #include <QDialog>
+#include <QTimer>
 
 class MainWindow;
 
@@ -46,10 +47,16 @@ private slots:
 
     void on_btnExit_clicked();
 
+    // Add these two methods
+    void closeOnSuccess();
+    void showErrorMessage();
+
 private:
     Ui::PinScreen *ui;
     int pinAttempts = 3;
     MainWindow *mainWindow;
+    void resetPinMessageTimer(int timeout);
+    QTimer *pinMessageTimer;
 };
 
 #endif // PINSCREEN_H

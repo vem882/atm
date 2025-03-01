@@ -40,10 +40,11 @@ const resetAttempts = async (cardNumber) => {
 
 const getCardByNumber = async (cardNumber) => {
   const query = `
-    SELECT c.*, a.*, cu.fname, cu.lname
+    SELECT c.*, a.*, cu.fname, cu.lname, cur.currency_symbol
     FROM card c
     JOIN account a ON c.idaccount = a.idaccount
     JOIN customer cu ON a.idcustomer = cu.idcustomer
+    JOIN currency cur ON a.currency_id = cur.idcurrency
     WHERE c.card_number = ?
   `;
   return new Promise((resolve, reject) => {

@@ -9,6 +9,7 @@ dotenv.config({ path: '../.env' });
 // Tuodaan reitittimet
 const indexRouter = require('./routes/index');
 const atmRouter = require('./routes/atm');
+const atmPingRouter = require('./routes/ping');
 const currencyRouter = require('./routes/currency');
 const transactionsRouter = require('./routes/transactions'); // lisäsin
 const cardRouter = require('./routes/card');
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Määritetään reitit
 app.use('/', indexRouter);
 app.use('/atm', atmRouter); 
+app.use('/ping', atmPingRouter); 
 app.use('/currency', currencyRouter);
 app.use('/transactions', transactionsRouter); // lisäsin
 app.use('/card',cardRouter);

@@ -19,7 +19,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'https://atm.dev.zroot.it',
+        url: 'http://localhost',
         description: 'Development server',
       },
     ],

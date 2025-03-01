@@ -1,4 +1,4 @@
-# TVT24KMO Ryhmä 3 ATM Kesken 
+# TVT24KMO Ryhmä 3 ATM 
 
 ## Project Overview
 
@@ -439,6 +439,9 @@ The project uses GitHub Actions for CI/CD. The workflows are defined in the work
 
 ## ER Diagram
 ![ER Diagram](DB_diagram.png)
+## ER Diagram
+![Esittelyvideo](https://www.youtube.com/embed/pzEEPkySRms)
+
 
 
 

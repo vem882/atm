@@ -216,7 +216,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>90</x>
      <y>40</y>
      <width>211</width>
      <height>20</height>
@@ -233,7 +233,7 @@
     <string>Enter pin</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLineEdit" name="textPin">
@@ -245,14 +245,21 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Small Fonts</family>
+     <pointsize>10</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="maxLength">
-    <number>4</number>
+    <number>6</number>
    </property>
    <property name="echoMode">
-    <enum>QLineEdit::Password</enum>
+    <enum>QLineEdit::EchoMode::Password</enum>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="btnUndoPin">
@@ -267,10 +274,6 @@
    <property name="text">
     <string/>
    </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>C:/Users/samul/Desktop/Project images/undo.png</normaloff>C:/Users/samul/Desktop/Project images/undo.png</iconset>
-   </property>
   </widget>
   <widget class="QPushButton" name="btnClearPin">
    <property name="geometry">
@@ -283,10 +286,6 @@
    </property>
    <property name="text">
     <string/>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>C:/Users/samul/Desktop/Project images/X.png</normaloff>C:/Users/samul/Desktop/Project images/X.png</iconset>
    </property>
   </widget>
   <widget class="QPushButton" name="btnConfirmPin">
@@ -301,15 +300,11 @@
    <property name="text">
     <string/>
    </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>C:/Users/samul/Desktop/Project images/checkmark.png</normaloff>C:/Users/samul/Desktop/Project images/checkmark.png</iconset>
-   </property>
   </widget>
   <widget class="QLabel" name="textPinInfo">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>20</x>
      <y>10</y>
      <width>331</width>
      <height>20</height>
@@ -326,27 +321,7 @@
     <string/>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnExit">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>10</y>
-     <width>41</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Small Fonts</family>
-     <pointsize>10</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Exit</string>
+    <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
  </widget>

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const cardModel = require('../../models/card_model');
-const atmModel = require('../../models/atm');
+const atmModel = require('../../models/atm_model');
 
 const login = async (req, res) => {
 console.log('Login request received:', req.params, req.body);
@@ -77,6 +77,9 @@ console.log('Login request received:', req.params, req.body);
           firstName: card.fname,
           lastName: card.lname,
         },
+        currency: {
+          currency_symbol: card.currency_symbol
+        }
       },
     });
   } catch (error) {
